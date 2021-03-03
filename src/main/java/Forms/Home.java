@@ -17,7 +17,7 @@ public class Home extends javax.swing.JFrame {
     public Home() {
         initComponents();
         setBounds(400,300,800,500);
-        setTitle("Gestion de stock");
+        setTitle("Gestion de stocks");
     }
     
 
