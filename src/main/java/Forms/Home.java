@@ -30,46 +30,52 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        DashLabel = new javax.swing.JLabel();
-        ProductLabel = new javax.swing.JLabel();
-        OrderLabel = new javax.swing.JLabel();
+        DashboardLink = new javax.swing.JButton();
+        ProductLink = new javax.swing.JButton();
+        OrderLink = new javax.swing.JButton();
         TabPanel = new javax.swing.JTabbedPane();
         DashboardPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         ProductsPanel = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         OrderPanel = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 102));
 
-        DashLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        DashLabel.setForeground(new java.awt.Color(255, 255, 255));
-        DashLabel.setText("Dashboard");
-        DashLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DashLabelMouseClicked(evt);
+        DashboardLink.setBackground(new java.awt.Color(0, 0, 102));
+        DashboardLink.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        DashboardLink.setForeground(new java.awt.Color(255, 255, 255));
+        DashboardLink.setText("Dashboard");
+        DashboardLink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DashboardLinkActionPerformed(evt);
             }
         });
 
-        ProductLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        ProductLabel.setForeground(new java.awt.Color(255, 255, 255));
-        ProductLabel.setText("Commandes");
-        ProductLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ProductLabelMouseClicked(evt);
+        ProductLink.setBackground(new java.awt.Color(0, 0, 102));
+        ProductLink.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ProductLink.setForeground(new java.awt.Color(255, 255, 255));
+        ProductLink.setText("Produits");
+        ProductLink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProductLinkActionPerformed(evt);
             }
         });
 
-        OrderLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        OrderLabel.setForeground(new java.awt.Color(255, 255, 255));
-        OrderLabel.setText("Produits");
-        OrderLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                OrderLabelMouseClicked(evt);
+        OrderLink.setBackground(new java.awt.Color(0, 0, 102));
+        OrderLink.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        OrderLink.setForeground(new java.awt.Color(255, 255, 255));
+        OrderLink.setText("Commandes");
+        OrderLink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OrderLinkActionPerformed(evt);
             }
         });
 
@@ -78,92 +84,130 @@ public class Home extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(DashLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ProductLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(OrderLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(OrderLink, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ProductLink, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DashboardLink, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(DashLabel)
+                .addGap(25, 25, 25)
+                .addComponent(DashboardLink)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(OrderLabel)
+                .addComponent(ProductLink)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ProductLabel)
-                .addContainerGap(339, Short.MAX_VALUE))
+                .addComponent(OrderLink)
+                .addContainerGap(342, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 464));
 
         DashboardPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("Dashboard");
+
+        jPanel2.setBackground(new java.awt.Color(153, 0, 153));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("40");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Produits");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addContainerGap(111, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout DashboardPanelLayout = new javax.swing.GroupLayout(DashboardPanel);
         DashboardPanel.setLayout(DashboardPanelLayout);
         DashboardPanelLayout.setHorizontalGroup(
             DashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DashboardPanelLayout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(jLabel4)
-                .addContainerGap(512, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(DashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addContainerGap(522, Short.MAX_VALUE))
         );
         DashboardPanelLayout.setVerticalGroup(
             DashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DashboardPanelLayout.createSequentialGroup()
-                .addGap(127, 127, 127)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel4)
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(274, Short.MAX_VALUE))
         );
 
         TabPanel.addTab("tab1", DashboardPanel);
 
         ProductsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel5.setText("jLabel5");
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setText("Produits");
 
         javax.swing.GroupLayout ProductsPanelLayout = new javax.swing.GroupLayout(ProductsPanel);
         ProductsPanel.setLayout(ProductsPanelLayout);
         ProductsPanelLayout.setHorizontalGroup(
             ProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ProductsPanelLayout.createSequentialGroup()
-                .addGap(263, 263, 263)
-                .addComponent(jLabel5)
-                .addContainerGap(408, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(629, Short.MAX_VALUE))
         );
         ProductsPanelLayout.setVerticalGroup(
             ProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductsPanelLayout.createSequentialGroup()
-                .addContainerGap(265, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(183, 183, 183))
+            .addGroup(ProductsPanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel7)
+                .addContainerGap(414, Short.MAX_VALUE))
         );
 
         TabPanel.addTab("tab2", ProductsPanel);
 
         OrderPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel6.setText("jLabel6");
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setText("Commandes");
 
         javax.swing.GroupLayout OrderPanelLayout = new javax.swing.GroupLayout(OrderPanel);
         OrderPanel.setLayout(OrderPanelLayout);
         OrderPanelLayout.setHorizontalGroup(
             OrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OrderPanelLayout.createSequentialGroup()
-                .addContainerGap(394, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(277, 277, 277))
+            .addGroup(OrderPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addContainerGap(594, Short.MAX_VALUE))
         );
         OrderPanelLayout.setVerticalGroup(
             OrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OrderPanelLayout.createSequentialGroup()
-                .addContainerGap(289, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(159, 159, 159))
+            .addGroup(OrderPanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel8)
+                .addContainerGap(414, Short.MAX_VALUE))
         );
 
         TabPanel.addTab("tab3", OrderPanel);
@@ -173,17 +217,17 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DashLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashLabelMouseClicked
+    private void DashboardLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashboardLinkActionPerformed
         TabPanel.setSelectedIndex(0);
-    }//GEN-LAST:event_DashLabelMouseClicked
+    }//GEN-LAST:event_DashboardLinkActionPerformed
 
-    private void OrderLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OrderLabelMouseClicked
+    private void ProductLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductLinkActionPerformed
         TabPanel.setSelectedIndex(1);
-    }//GEN-LAST:event_OrderLabelMouseClicked
+    }//GEN-LAST:event_ProductLinkActionPerformed
 
-    private void ProductLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductLabelMouseClicked
+    private void OrderLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderLinkActionPerformed
         TabPanel.setSelectedIndex(2);
-    }//GEN-LAST:event_ProductLabelMouseClicked
+    }//GEN-LAST:event_OrderLinkActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,16 +265,19 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel DashLabel;
+    private javax.swing.JButton DashboardLink;
     private javax.swing.JPanel DashboardPanel;
-    private javax.swing.JLabel OrderLabel;
+    private javax.swing.JButton OrderLink;
     private javax.swing.JPanel OrderPanel;
-    private javax.swing.JLabel ProductLabel;
+    private javax.swing.JButton ProductLink;
     private javax.swing.JPanel ProductsPanel;
     private javax.swing.JTabbedPane TabPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
