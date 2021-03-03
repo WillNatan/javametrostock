@@ -11,11 +11,33 @@ package Models;
  */
 public class Product {
 
+    private int id;
     private String name;
     private int quantity;
+    private int prix;
     
-    public Product(){
-        
+     public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPrix() {
+        return prix;
+    }
+
+    public void setPrix(int prix) {
+        this.prix = prix;
+    }
+    
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getName() {
@@ -25,13 +47,10 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-
-    public int getQuantity() {
-        return quantity;
+    
+    public Product(){
+        
     }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+    
 
 }
