@@ -17,8 +17,9 @@ public class Home extends javax.swing.JFrame {
     public Home() {
         initComponents();
         setBounds(400,300,800,500);
-        setTitle("Gestion de stocks");
+        setTitle("Gestion de stock");
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
