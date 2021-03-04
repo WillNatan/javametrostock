@@ -19,7 +19,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Willy
  */
 public class Home extends javax.swing.JFrame {
-
+    
+  
     /**
      * Creates new form Home
      */
@@ -28,8 +29,38 @@ public class Home extends javax.swing.JFrame {
 
     public Home() {
         initComponents();
+        
         setBounds(400, 300, 800, 500);
         setTitle("Gestion de stocks");
+    }
+    
+    public void handleJtable(){
+        try {
+            
+            ResultSet res = db.findAllProducts();
+
+            String columns[] = {"ID", "Name", "Quantity", "Prix"};
+            String data[][] = new String[8][4];
+
+            int i = 0;
+            while (res.next()) {
+                //System.out.println(res.getString("name"));
+                int id = res.getInt("ID");
+                String nom = res.getString("name");
+                int quantity = Integer.parseInt(res.getString("quantity")); //conversion int en string
+                int prix = Integer.parseInt(res.getString("prix"));
+                data[i][0] = id + "";
+                data[i][1] = nom;
+                data[i][2] = quantity + "";
+                data[i][3] = prix + " €";
+                i++;
+            }
+            DefaultTableModel model = new DefaultTableModel(data, columns);
+            jTable1.setModel(model);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -56,6 +87,7 @@ public class Home extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
         OrderPanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
 
@@ -204,6 +236,13 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        jToggleButton1.setText("Actualiser");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ProductsPanelLayout = new javax.swing.GroupLayout(ProductsPanel);
         ProductsPanel.setLayout(ProductsPanelLayout);
         ProductsPanelLayout.setHorizontalGroup(
@@ -213,7 +252,10 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(ProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addGroup(ProductsPanelLayout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jToggleButton1)))
                 .addContainerGap(219, Short.MAX_VALUE))
         );
         ProductsPanelLayout.setVerticalGroup(
@@ -224,7 +266,9 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addGroup(ProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jToggleButton1))
                 .addContainerGap(149, Short.MAX_VALUE))
         );
 
@@ -265,34 +309,7 @@ public class Home extends javax.swing.JFrame {
 
     private void ProductLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductLinkActionPerformed
         TabPanel.setSelectedIndex(1);
-
-        try {
-            String query = "SELECT * FROM product";
-            Statement stm = connexion.createStatement();
-            ResultSet res = stm.executeQuery(query);
-
-            String columns[] = {"ID", "Name", "Quantity", "Prix"};
-            String data[][] = new String[8][4];
-
-            int i = 0;
-            while (res.next()) {
-                //System.out.println(res.getString("name"));
-                int id = res.getInt("ID");
-                String nom = res.getString("name");
-                int quantity = Integer.parseInt(res.getString("quantity")); //conversion int en string
-                int prix = Integer.parseInt(res.getString("prix"));
-                data[i][0] = id + "";
-                data[i][1] = nom;
-                data[i][2] = quantity + "";
-                data[i][3] = prix + " €";
-                i++;
-            }
-            DefaultTableModel model = new DefaultTableModel(data, columns);
-            jTable1.setModel(model);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        this.handleJtable();
     }//GEN-LAST:event_ProductLinkActionPerformed
 
     private void OrderLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderLinkActionPerformed
@@ -304,9 +321,11 @@ public class Home extends javax.swing.JFrame {
         AddProduct product = new AddProduct();
         product.setVisible(true);
         System.out.println("ajouter produit");
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        this.handleJtable();
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,5 +380,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

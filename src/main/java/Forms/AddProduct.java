@@ -150,19 +150,17 @@ public class AddProduct extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        
         try {
-            String query = "INSERT INTO product (name,prix,quantity) VALUES ('"+textName.getText()+"','"+textPrix.getText()+"','"+textQty.getText()+"')"; //concaténation
+            String query = "INSERT INTO product (name,prix,quantity) VALUES ('" + textName.getText() + "','" + textPrix.getText() + "','" + textQty.getText() + "')"; //concaténation
             Statement stm = connexion.createStatement();
             stm.executeUpdate(query);
-            
-            System.out.println(Frame.getFrames().getClass().getName());
-            //SwingUtilities.updateComponentTreeUI(Window.getWindows().getClass());
-            
+           
+            this.setVisible(false);
         } catch (Exception e) {
             System.out.println(e);
         }
-      
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void textNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNameActionPerformed

@@ -8,7 +8,9 @@ package Configuration;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,5 +43,19 @@ public class Database {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         return connexion;
+    }
+    
+    public ResultSet findAllProducts() {
+        ResultSet res = null;
+        try {
+            Connection connexion = useDbConnection();
+            String query = "SELECT * FROM product";
+            Statement stm = connexion.createStatement();
+            res = stm.executeQuery(query);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return res;
     }
 }
