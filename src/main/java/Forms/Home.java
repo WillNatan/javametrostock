@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,6 +34,22 @@ public class Home extends javax.swing.JFrame {
         
         setBounds(400, 300, 800, 500);
         setTitle("Gestion de stocks");
+        NbProducts.setText(getProductsCount());
+    }
+    
+    public String getProductsCount() {
+        int i = 0;
+        try {
+            ResultSet res = db.findAllProducts();
+            
+            while (res.next()) {
+                i++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String result = String.valueOf(i);
+        return result;
     }
     
     public void handleJtable(){
@@ -80,7 +98,7 @@ public class Home extends javax.swing.JFrame {
         DashboardPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        NbProducts = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         ProductsPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -159,9 +177,9 @@ public class Home extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(153, 0, 153));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("40");
+        NbProducts.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        NbProducts.setForeground(new java.awt.Color(255, 255, 255));
+        NbProducts.setText("40");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -174,7 +192,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(NbProducts)
                     .addComponent(jLabel2))
                 .addContainerGap(111, Short.MAX_VALUE))
         );
@@ -182,7 +200,7 @@ public class Home extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(NbProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -365,13 +383,13 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DashboardLink;
     private javax.swing.JPanel DashboardPanel;
+    private javax.swing.JLabel NbProducts;
     private javax.swing.JButton OrderLink;
     private javax.swing.JPanel OrderPanel;
     private javax.swing.JButton ProductLink;
     private javax.swing.JPanel ProductsPanel;
     private javax.swing.JTabbedPane TabPanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
