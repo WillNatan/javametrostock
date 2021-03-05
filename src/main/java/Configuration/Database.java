@@ -58,4 +58,18 @@ public class Database {
         }
         return res;
     }
+    
+    public ResultSet findAllOrders() {
+        ResultSet res = null;
+        try {
+            Connection connexion = useDbConnection();
+            String query = "SELECT * FROM commande";
+            Statement stm = connexion.createStatement();
+            res = stm.executeQuery(query);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return res;
+    }
 }

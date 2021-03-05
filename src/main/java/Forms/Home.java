@@ -6,7 +6,9 @@
 package Forms;
 
 import Configuration.Database;
+import CustomFunctions.OrderTableModel;
 import CustomFunctions.ProductsTableModel;
+import Models.Commande;
 import Models.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +18,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
 /**
@@ -33,10 +34,6 @@ public class Home extends javax.swing.JFrame {
 
     public Home() {
         initComponents();
-        String colNames[] = {"ID", "Nom du produit", "Prix", "Quantité"};
-        List<Product> products = new ArrayList<>(25);
-        ProductsTableModel tableModel = new ProductsTableModel(products, colNames);
-        jTable1.setModel(tableModel);
         setBounds(400, 300, 800, 500);
         setTitle("Gestion de stocks");
         NbProducts.setText(getProductsCount());
@@ -57,24 +54,44 @@ public class Home extends javax.swing.JFrame {
         return result;
     }
 
-    public void handleJtable() {
+    public void handleJtableProducts() {
         try {
-
             ResultSet res = db.findAllProducts();
             List<Product> products = new ArrayList<>(25);
-            ((ProductsTableModel) jTable1.getModel()).setProducts(products);
             while (res.next()) {
                 Product product = new Product();
                 product.setId(res.getInt("ID"));
                 product.setName(res.getString("name"));
                 product.setPrix(Integer.parseInt(res.getString("prix")));
                 product.setQuantity(Integer.parseInt(res.getString("quantity")));
-                ((ProductsTableModel) jTable1.getModel()).ajouter(product);
+                products.add(product);
             }
 
-            //String colNames[] = {"ID","Nom du produit","Prix","Quantité"};
-            //ProductsTableModel tableModel = new ProductsTableModel(products, colNames);
-            //jTable1.setModel(tableModel);
+            String colNames[] = {"ID", "Nom du produit", "Prix", "Quantité"};
+            ProductsTableModel tableModel = new ProductsTableModel(products, colNames);
+            jTable1.setModel(tableModel);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleJtableOrders() {
+        try {
+            ResultSet res = db.findAllOrders();
+            List<Commande> orders = new ArrayList<>(25);
+
+            while (res.next()) {
+
+                Commande order = new Commande();
+                
+                order.setId(res.getInt("ID"));
+                order.setNocommande(res.getBigDecimal("nocommande"));
+                orders.add(order);
+            }
+
+            String colNames[] = {"ID", "Numéro de commande"};
+            OrderTableModel tableModel = new OrderTableModel(orders, colNames);
+            OrderTable.setModel(tableModel);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -108,7 +125,7 @@ public class Home extends javax.swing.JFrame {
         OrderPanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        OrderTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -298,7 +315,7 @@ public class Home extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setText("Commandes");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        OrderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"0", "2021030400001"},
                 {"1", "2021030400002"},
@@ -310,9 +327,9 @@ public class Home extends javax.swing.JFrame {
                 "ID", "Numéro de commande"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane2.setViewportView(OrderTable);
+        if (OrderTable.getColumnModel().getColumnCount() > 0) {
+            OrderTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
         javax.swing.GroupLayout OrderPanelLayout = new javax.swing.GroupLayout(OrderPanel);
@@ -351,22 +368,22 @@ public class Home extends javax.swing.JFrame {
 
     private void ProductLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductLinkActionPerformed
         TabPanel.setSelectedIndex(1);
-        this.handleJtable();
+        this.handleJtableProducts();
     }//GEN-LAST:event_ProductLinkActionPerformed
 
     private void OrderLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderLinkActionPerformed
         TabPanel.setSelectedIndex(2);
+        this.handleJtableOrders();
     }//GEN-LAST:event_OrderLinkActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         AddProduct product = new AddProduct();
         product.setVisible(true);
-        System.out.println("ajouter produit");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        this.handleJtable();
+        this.handleJtableProducts();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
@@ -410,6 +427,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel NbProducts;
     private javax.swing.JButton OrderLink;
     private javax.swing.JPanel OrderPanel;
+    private javax.swing.JTable OrderTable;
     private javax.swing.JButton ProductLink;
     private javax.swing.JPanel ProductsPanel;
     private javax.swing.JTabbedPane TabPanel;
@@ -423,7 +441,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

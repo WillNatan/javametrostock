@@ -5,6 +5,7 @@
  */
 package Models;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 /**
@@ -14,16 +15,17 @@ import java.sql.Date;
 public class Commande {
     private int id;
     private Date datecommande;
-    private int nocommande;
+    private BigDecimal nocommande;
 
-    public int getNocommande() {
+    public BigDecimal getNocommande() {
         return nocommande;
     }
 
-    public void setNocommande(int nocommande) {
+    public void setNocommande(BigDecimal nocommande) {
         this.nocommande = nocommande;
     }
 
+   
 
     public int getId() {
         return id;

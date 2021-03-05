@@ -5,7 +5,7 @@
  */
 package CustomFunctions;
 
-import Models.Product;
+import Models.Commande;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -14,22 +14,24 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Willy
  */
-public class ProductsTableModel extends AbstractTableModel {
+public class OrderTableModel extends AbstractTableModel {
 
-    private List<Product> products;
+    private List<Commande> orders;
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setOrders(List<Commande> orders) {
+        this.orders = orders;
     }
+
+    
     private String colNames[];
 
-    public ProductsTableModel(List<Product> products, String colnames[]) {
-        this.products = new ArrayList<>(products);
+    public OrderTableModel(List<Commande> products, String colnames[]) {
+        this.orders = new ArrayList<>(products);
         this.colNames = colnames;
     }
     
-    public void ajouter(Product product){
-        products.add(product);
+    public void ajouter(Commande product){
+        orders.add(product);
         this.fireTableDataChanged();
     }
     
@@ -37,7 +39,7 @@ public class ProductsTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return products.size();
+        return orders.size();
     }
 
     @Override
@@ -52,22 +54,17 @@ public class ProductsTableModel extends AbstractTableModel {
     
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Product product = products.get(rowIndex);
+        Commande order = orders.get(rowIndex);
         Object value = null;
         
         switch (columnIndex) {
             case 0:
-                value = product.getId();
+                value = order.getId();
                 break;
             case 1:
-                value = product.getName();
+                value = order.getNocommande();
                 break;
-            case 2:
-                value = product.getPrix()+" €";
-                break;
-            case 3:
-                value = product.getQuantity();
-                break;
+            
         }
 
         return value;
