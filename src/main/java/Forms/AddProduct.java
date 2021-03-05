@@ -6,6 +6,7 @@
 package Forms;
 
 import Configuration.Database;
+import CustomFunctions.ProductsTableModel;
 import java.awt.Frame;
 import java.awt.Window;
 import java.sql.Connection;
@@ -28,7 +29,6 @@ public class AddProduct extends javax.swing.JFrame {
     public AddProduct() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -155,7 +155,6 @@ public class AddProduct extends javax.swing.JFrame {
             String query = "INSERT INTO product (name,prix,quantity) VALUES ('" + textName.getText() + "','" + textPrix.getText() + "','" + textQty.getText() + "')"; //concaténation
             Statement stm = connexion.createStatement();
             stm.executeUpdate(query);
-           
             this.setVisible(false);
         } catch (Exception e) {
             System.out.println(e);

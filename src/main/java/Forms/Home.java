@@ -6,23 +6,25 @@
 package Forms;
 
 import Configuration.Database;
+import CustomFunctions.ProductsTableModel;
 import Models.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 /**
  *
  * @author Willy
  */
 public class Home extends javax.swing.JFrame {
-    
-  
+
     /**
      * Creates new form Home
      */
@@ -31,17 +33,20 @@ public class Home extends javax.swing.JFrame {
 
     public Home() {
         initComponents();
-        
+        String colNames[] = {"ID", "Nom du produit", "Prix", "Quantité"};
+        List<Product> products = new ArrayList<>(25);
+        ProductsTableModel tableModel = new ProductsTableModel(products, colNames);
+        jTable1.setModel(tableModel);
         setBounds(400, 300, 800, 500);
         setTitle("Gestion de stocks");
         NbProducts.setText(getProductsCount());
     }
-    
+
     public String getProductsCount() {
         int i = 0;
         try {
             ResultSet res = db.findAllProducts();
-            
+
             while (res.next()) {
                 i++;
             }
@@ -51,31 +56,25 @@ public class Home extends javax.swing.JFrame {
         String result = String.valueOf(i);
         return result;
     }
-    
-    public void handleJtable(){
+
+    public void handleJtable() {
         try {
-            
+
             ResultSet res = db.findAllProducts();
-
-            String columns[] = {"ID", "Name", "Quantity", "Prix"};
-            String data[][] = new String[8][4];
-
-            int i = 0;
+            List<Product> products = new ArrayList<>(25);
+            ((ProductsTableModel) jTable1.getModel()).setProducts(products);
             while (res.next()) {
-                //System.out.println(res.getString("name"));
-                int id = res.getInt("ID");
-                String nom = res.getString("name");
-                int quantity = Integer.parseInt(res.getString("quantity")); //conversion int en string
-                int prix = Integer.parseInt(res.getString("prix"));
-                data[i][0] = id + "";
-                data[i][1] = nom;
-                data[i][2] = quantity + "";
-                data[i][3] = prix + " €";
-                i++;
+                Product product = new Product();
+                product.setId(res.getInt("ID"));
+                product.setName(res.getString("name"));
+                product.setPrix(Integer.parseInt(res.getString("prix")));
+                product.setQuantity(Integer.parseInt(res.getString("quantity")));
+                ((ProductsTableModel) jTable1.getModel()).ajouter(product);
             }
-            DefaultTableModel model = new DefaultTableModel(data, columns);
-            jTable1.setModel(model);
 
+            //String colNames[] = {"ID","Nom du produit","Prix","Quantité"};
+            //ProductsTableModel tableModel = new ProductsTableModel(products, colNames);
+            //jTable1.setModel(tableModel);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -244,7 +243,7 @@ public class Home extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nom du produit", "Prix", "Quantité"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
